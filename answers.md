@@ -46,7 +46,7 @@ awk -F',' 'NR>1 && $4 < 0.60*$5 {fail++} END {print fail}' Lab03-data.csv
 #Result: 50
 
 #`awk` to read the gradebook file line by line. I used `-F','` because the file is separated by commas. I used `NR>1` to skip the header line because it does not contain a real grade. Then I used the condition `$4 < 0.60*$5` to check if the score is lower than 60 percent of the maximum score for that assignment. I used `$4` for the student score and `$5` for the maximum score, so the command works for quizzes, labs, homework, WS, and FINAL. Every time a failed submission is found, `fail++` adds one to the counter. At the end, the `END` block prints the total number of failed submissions.
-]633;E;echo "";745d38a1-5ccf-4498-8284-bbfde334c8ff]633;C
+
 ----Task 5
 
 #Script file: assignment_report.awk
@@ -81,3 +81,29 @@ WS               2       5       4.21
 FINAL          116     200     156.86
 
 #This script creates a report for each assignment. The `BEGIN` block sets the comma as the field separator and prints the header of the table. It also defines the order of the assignments, so the report is easier to read. For each data line after the header, the script takes the assignment name from `$3` and the score from `$4`. The arrays `min`, `max`, `total`, and `count` store information for each assignment. The first time an assignment appears, the script sets its minimum and maximum with the first score found. After that, each new score is compared with the current minimum and maximum. The script also adds every score to `total[assignment]` and counts how many scores exist for that assignment. In the `END` block, the average is calculated with `total[assignment] / count[assignment]`. The `printf` command formats the table and prints the average with two decimal places.
+
+----Task 6
+
+#Script file: student_grades.awk
+
+#Command:
+awk -f student_grades.awk Lab03-data.csv
+
+#Result:
+Student       Percent Grade
+Tomas          82.22%     B
+Diana          62.08%     D
+Andrew         73.69%     C
+Lucia          89.53%     B
+Kenji          86.45%     B
+Chelsey        62.65%     D
+Eliza          84.16%     B
+Shane          93.12%     A
+Noah           63.08%     D
+Ava            81.43%     B
+Maria          79.57%     C
+Priya          71.04%     C
+Jackson        78.64%     C
+Sam            72.90%     C
+
+#This calculates the final weighted percentage for each student. The `BEGIN` block sets the comma as the field separator and prints the table header. For every line after the header, the script takes the student name from `$1`, the score from `$4`, and the maximum score from `$5`. The array `score_total` stores the total points earned by each student. The array `max_total` stores the total possible points for the same student. This is important because the assignments have different maximum values. In the `END` block, the script divides the total score by the total maximum score and multiplies by 100. Then the `if`, `else if`, and `else` conditions assign the correct letter grade. The `printf` command prints the name, percentage with two decimal places, and final letter grade in aligned columns.
