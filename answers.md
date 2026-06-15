@@ -36,7 +36,7 @@ Sam        152
 Ava        172
 Chelsey    142
 
-#I used `-F','` because this is a CSV file, so each field is separated by a comma. I used `NR>1` because the first line is only the header and it is not a student grade. I used `$3=="FINAL"` to filter only the rows where the assignment name is FINAL. Then I used `printf` to format the output. The format `%-10s` prints the student name on the left using 10 spaces, and `%3d` prints the FINAL score as a number aligned to the right. This makes the report easier to read.
+#I put `-F','` because this is a CSV file, so each field is separated by a comma. I used `NR>1` because the first line is only the header and it is not a student grade. I used `$3=="FINAL"` to filter only the rows where the assignment name is FINAL. Then I used `printf` to format the output. The format `%-10s` prints the student name on the left using 10 spaces, and `%3d` prints the FINAL score as a number aligned to the right. This makes the report easier to read.
 
 ----Task 4
 
