@@ -133,3 +133,30 @@ Shane          93.12%     A
 Tomas          82.22%     B
 
 #This Bash script receives the CSV file name as the first argument with `$1`. The variable `file` stores that file name. The `if` block checks if the user forgot to write a file name. If no file is given, the script prints a usage message and stops. The command `mktemp` creates a temporary file to save the output from `student_grades.awk`. Then the script runs `awk -f student_grades.awk "$file"` and saves the result in the temporary file. The command `head -n 1` prints only the header line. The command `tail -n +2` prints all lines after the header, and `sort` orders those student rows alphabetically. At the end, `rm "$tmp_file"` deletes the temporary file because it is no longer needed.
+
+## Bonus
+
+#Script file: student_grades.awk
+
+#Command:
+awk -f student_grades.awk Lab03-data.csv
+
+#Result:
+Student       Percent Grade
+Tomas          82.22%     B
+Diana          62.08%     D
+Andrew         73.69%     C
+Lucia          89.53%     B
+Kenji          86.45%     B
+Chelsey        62.65%     D
+Eliza          84.16%     B
+Shane          93.12%     A
+Noah           63.08%     D
+Ava            81.43%     B
+Maria          79.57%     C
+Priya          71.04%     C
+Jackson        78.64%     C
+Sam            72.90%     C
+CLASS          77.18%     -
+
+#Explanation: This bonus extends Task 6 by adding a CLASS row at the end of the report. The script calculates each student percentage first. Then it adds each percentage to `class_total` and increases `student_count` by one for each student. After all students are processed, the class average is calculated with `class_total / student_count`. The final `printf` line prints the CLASS row with the average percentage using two decimal places.

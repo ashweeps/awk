@@ -1,7 +1,7 @@
 # Name: Ashley Espinoza
 # Course: Introduce to Unix
 # File: student_grades.awk
-# Purpose: Calculate the weighted percentage and letter grade for each student.
+# Purpose: Calculate the weighted percentage and letter grade for each student, and print the class average.
 
 BEGIN { 
 FS="," 
@@ -15,6 +15,9 @@ max_total[student] += $5
 }
 
 END { 
+class_total = 0 
+student_count = 0 
+
 for (student in score_total) { 
 percent = (score_total[student] / max_total[student]) * 100 
 
@@ -31,5 +34,11 @@ grade = "E"
 } 
 
 printf "%-10s %9.2f%% %5s\n", student, percent, grade 
-}
+
+class_total += percent 
+student_count++ 
+} 
+
+class_average = class_total / student_count 
+printf "%-10s %9.2f%% %5s\n", "CLASS", class_average, "-"
 }
